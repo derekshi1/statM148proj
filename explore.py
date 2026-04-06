@@ -16,3 +16,13 @@ print(df.head())
 first_user_journey = df[0, "journey"]
 print("\n--- First User's First 3 Actions ---")
 print(first_user_journey[:3])
+
+
+first_user_journey = df[1, "journey"]
+print("\n--- Second User's First 3 Actions ---")
+print(first_user_journey[:3])
+
+
+first_user_journey = df[2, "journey"]
+print("\n--- Third User's First 3 Actions ---")
+print(first_user_journey[:3])
