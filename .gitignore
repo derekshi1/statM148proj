@@ -1,3 +1,5 @@
 .env
 .parquet
 .csv
+train.csv
+training_new_data.parquet
