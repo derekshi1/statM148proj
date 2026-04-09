@@ -3,3 +3,5 @@
 .csv
 train.csv
 training_new_data.parquet
+truncated_data_codex.parquet
+
