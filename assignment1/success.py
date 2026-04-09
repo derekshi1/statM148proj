@@ -1,7 +1,7 @@
 import polars as pl
 
 # 1. Load the data
-df = pl.read_parquet("training_new_data.parquet")
+df = pl.read_parquet("/Users/derek/Documents/statM148proj/training_new_data.parquet")
 SUCCESS_ID = 28  # order_shipped
 
 print("Analyzing success cases...")
@@ -43,7 +43,7 @@ print(comparison)
 
 # 5. What are the most common actions for SUCCESSFUL users only?
 print("\nTop actions for Successful Users...")
-event_defs = pl.read_csv("Event Definitions.csv")
+event_defs = pl.read_csv("/Users/derek/Documents/statM148proj/Event Definitions.csv")
 
 top_success_actions = (
     df_stats.filter(pl.col("is_success"))

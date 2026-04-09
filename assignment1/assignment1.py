@@ -1,7 +1,7 @@
 import polars as pl
 
 # Load your processed file
-df = pl.read_parquet("training_new_data.parquet")
+df = pl.read_parquet("/Users/derek/UCLA_stats/statM148proj/training_new_data.parquet")
 
 # 1. How many rows (Users)?
 n_rows = df.height
@@ -25,7 +25,7 @@ print(f"3. Time Range: {time_stats.row(0)[0]} to {time_stats.row(0)[1]}")
 
 
 # 1. Start a Lazy Scan (Doesn't load into RAM yet)
-csv_path = "training_data.csv"
+csv_path = "/Users/derek/UCLA_stats/statM148proj/training_data.csv"
 q = pl.scan_csv(csv_path)
 
 # 2. Get the Total Row Count (Raw)
@@ -34,7 +34,7 @@ total_count = q.select(pl.len()).collect().item()
 # 3. Define the Duplicates 
 # We define a duplicate as same ID, same Action (ed_id), and same Timestamp
 # We keep the first occurrence
-q_unique = q.unique(subset=["id", "customer_id", "event_timestamp"], keep="first")
+q_unique = q.unique(subset=["id", "ed_id", "event_timestamp"], keep="first")
 
 # 4. Execute the deduplication and get the New Count
 df_cleaned = q_unique.collect()
@@ -53,7 +53,7 @@ print(f"4. Rows remaining after cleaning: {unique_count:,}")
 
 # 7. Optional: Save the cleaned data to Parquet for your next steps
 # (This is much better than saving back to a massive CSV)
-df_cleaned.write_parquet("cleaned_training_data.parquet")
+df_cleaned.write_parquet("new_cleaned_training_data.parquet")
 
 
 

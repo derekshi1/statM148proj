@@ -1,3 +1,7 @@
+# Assignment 1: Group 4
+## Derek Shi, Caoimhe (Queeva) Curran, Jayden Tani, Emilio Dulay
+
+
 # TASK 1
 
 ## 1. Total Rows: 54,960,961
@@ -6,9 +10,9 @@
 
 # TASK 2
 
-## 1. Total duplicates found: 4,515,888
-## 2. Proportion of duplicates: 8.22%
-## 3. Rows remaining after cleaning: 50,445,073
+## 1. Total duplicates found: 3,112,100
+## 2. Proportion of duplicates: 5.66%
+## 3. Rows remaining after cleaning: 51,848,861
 
 # TASK 3
 I sampled 10% of the data on seed(42), to get 143,000 users, then proceeded with summary stats
@@ -18,11 +22,11 @@ I used median over mean in the case of large outliers (bots) which would skew re
 
 **Median Actions per Journey:** 24.0 actions
 
-![The number of actions per Journney shows a steady decrease in countas actions increase](/Users/derek/Documents/statM148proj/number_of_actions.png)
+![The number of actions per Journney shows a steady decrease in countas actions increase](number_of_actions.png)
 
 **Median Journey Duration:** 140,758.61 minutes (~97.75 days)
 **Median between Actions:** 88 seconds (Median time between actions)
-![Actions are concentrated heavily in the first 100 seconds, and have a significant drop off followed by a steady decline thereafter](/Users/derek/Documents/statM148proj/time_between_actions.png)
+![Actions are concentrated heavily in the first 100 seconds, and have a significant drop off followed by a steady decline thereafter](time_between_actions.png)
 
 Insight: While the total "life" of a user ID in the system spans roughly 3 months, the 88-second median between actions suggests that actual engagement occurs in smaller sessions.
 
@@ -33,7 +37,7 @@ Insight: While the total "life" of a user ID in the system spans roughly 3 month
 | **Browse Products** | 1,944,325 | First Purchase |
 | **View Cart** | 595,620 | First Purchase |
 | **Application Web View** | 590,662 | Apply for Credit |
-![Note: the count of users per action is on the 1e6 scale, showing a dominant number of actions in browse_products](/Users/derek/Documents/statM148proj/top10frequentactions.png)
+![Note: the count of users per action is on the 1e6 scale, showing a dominant number of actions in browse_products](top10frequentactions.png)
 
 ## 3. Success Case Analysis
 A "Success" is defined as any journey containing at least one **order_shipped** event (Event ID: 28). This segment represents **19.53%** (279,363 users) of the total population.
