@@ -31,6 +31,11 @@ Finally, we apply the Random Truncation, to simulate the random ability to be ca
 
 
 # Task 3:
+<img width="595" height="123" alt="Screenshot 2026-04-16 at 11 28 55 AM" src="https://github.com/user-attachments/assets/28e1ffa0-32be-4ae3-8e8e-e792f09ee353" />
+
+In this, we compare the results of three separate models.  We used a basic logistic regression, XGBoost, and a neural network.  We can see that the XGBoost and 
+
+<img width="318" height="381" alt="Screenshot 2026-04-16 at 11 26 10 AM" src="https://github.com/user-attachments/assets/1c564a04-e572-4d78-9e1d-aa2c53f23dca" />
 
 
 
