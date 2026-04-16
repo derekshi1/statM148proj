@@ -27,16 +27,17 @@ In a real-world environment, we are much more likely to "catch" a long journey i
 To ensure our training data reflects this "Testing Distribution," we did not sample users uniformly. Instead we create a feature called sampling_weight, which will create "importance" for longer journeys in our machine learning model. 
 
 
-Finally, we apply the Random Truncation, to simulate the random ability to be caught in th emiddle of a journey, rather than including the successful actions itself.
+Finally, we apply the Random Truncation, to simulate the random ability to be caught in the middle of a journey, rather than including the successful actions itself.
 
 
 # Task 3:
 <img width="595" height="123" alt="Screenshot 2026-04-16 at 11 28 55 AM" src="https://github.com/user-attachments/assets/28e1ffa0-32be-4ae3-8e8e-e792f09ee353" />
 
-In this, we compare the results of three separate models.  We used a basic logistic regression, XGBoost, and a neural network.  We can see that the XGBoost and 
+In this, we compare the results of three separate models.  We used a basic logistic regression, XGBoost, and a neural network.  We can see that the XGBoost and neural network performed very similarly, while the logistic regression performed slightly worse.  
 
 <img width="318" height="381" alt="Screenshot 2026-04-16 at 11 26 10 AM" src="https://github.com/user-attachments/assets/1c564a04-e572-4d78-9e1d-aa2c53f23dca" />
 
+For the feature importance plot, we opted to use SHAP and the XGBoost model for our analysis.  Our top three influential features were observed_duration_days, days_since_last_event, and max_milestone_seen.  Not a single count for each event definition made the top 20, so we can likely conclude that they are not an essential feature.  
 
 
 
