@@ -1,7 +1,7 @@
 import polars as pl
 
 # 1. Load the data
-df = pl.read_parquet("/Users/derek/Documents/statM148proj/training_new_data.parquet")
+df = pl.read_parquet("/Users/derek/UCLA_stats/statM148proj/data/training_new_data.parquet")
 SUCCESS_ID = 28  # order_shipped
 
 print("Analyzing success cases...")
@@ -43,7 +43,7 @@ print(comparison)
 
 # 5. What are the most common actions for SUCCESSFUL users only?
 print("\nTop actions for Successful Users...")
-event_defs = pl.read_csv("/Users/derek/Documents/statM148proj/Event Definitions.csv")
+event_defs = pl.read_csv("/Users/derek/UCLA_stats/statM148proj/Event Definitions.csv")
 
 top_success_actions = (
     df_stats.filter(pl.col("is_success"))
@@ -59,3 +59,16 @@ top_success_actions = (
 )
 
 print(top_success_actions.select(["event_name", "len", "stage"]))
+
+
+# Extract the timestamp of the very first event and calculate actions within 24h
+df_momentum = df_stats.with_columns(
+    pl.col("journey").list.eval(
+        (pl.element().struct.field("event_timestamp") - pl.element().struct.field("event_timestamp").first()).dt.total_seconds() < 86400
+    ).list.sum().alias("actions_first_24h")
+)
+
+momentum_comparison = df_momentum.group_by("is_success").agg(
+    pl.col("actions_first_24h").mean().alias("avg_early_momentum")
+)
+print(momentum_comparison)
