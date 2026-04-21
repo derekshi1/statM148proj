@@ -24,7 +24,7 @@ def parse_args():
     )
     parser.add_argument(
         "--input",
-        default="training_new_data.parquet",
+        default="testing_new_data.parquet",
         help=(
             "Grouped journey parquet. This repo already has training_new_data.parquet, "
             "which is the cleaned event data organized into per-journey lists."
@@ -37,7 +37,7 @@ def parse_args():
     )
     parser.add_argument(
         "--output",
-        default="truncated_data_codex.parquet",
+        default="testing_truncated_data_codex.parquet",
         help="Output parquet path.",
     )
     parser.add_argument(

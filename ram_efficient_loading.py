@@ -4,8 +4,8 @@
 
 import polars as pl
 
-training_csv_path = "/Users/derek/UCLA_stats/statM148proj/training_data.csv"
-output_path = "/Users/derek/UCLA_stats/statM148proj/checking.parquet"
+training_csv_path = "/Users/emiliodulay/Documents/1. UCLA/2. Year 2/3. Spring 2026/STAT M148/statM148proj/test.csv"
+output_path = "/Users/emiliodulay/Documents/1. UCLA/2. Year 2/3. Spring 2026/STAT M148/statM148proj/testing_new_data.parquet"
 
 def flatten_journeys_parquet(input_csv_path, output_parquet_path):
     """
