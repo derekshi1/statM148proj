@@ -1,4 +1,7 @@
+# Task 1
+I am not sure how useful this plot is, as the amount of unsuccessful users makes it much harder to create a distinction in the feature's effect on success. We are working on subsetting the pdp plot to show the success vs. non success users and isolate the feature affect that way.
 
+![Ice plot analyzing the effect of "max_milesone_seen", which was the most important predictor in my xgboost model](pdp_ice_plot.png)
 
 # Task 2
 
