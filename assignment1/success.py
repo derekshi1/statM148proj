@@ -1,5 +1,6 @@
 import polars as pl
-
+import seaborn as sns
+import matplotlib.pyplot as plt
 # 1. Load the data
 df = pl.read_parquet("/Users/derek/UCLA_stats/statM148proj/data/training_new_data.parquet")
 SUCCESS_ID = 28  # order_shipped
@@ -21,54 +22,37 @@ df_stats = df.with_columns([
 ])
 
 # 3. Calculate Overall Conversion Rate
-total_users = df_stats.height
-success_users = df_stats.filter(pl.col("is_success")).height
-conversion_rate = (success_users / total_users) * 100
+windows = {
+    "1h": 3600,
+    "5h": 5 * 3600,
+    "1d": 24 * 3600,
+    "3d": 72 * 3600
+}
 
-print(f"--- Global Conversion Stats ---")
-print(f"Total Unique Users: {total_users:,}")
-print(f"Successful Users (Orders): {success_users:,}")
-print(f"Conversion Rate: {conversion_rate:.2f}%")
+# 1. Calculate momentum for each window
+momentum_expressions = []
+for name, seconds in windows.items():
+    expr = pl.col("journey").list.eval(
+        (pl.element().struct.field("event_timestamp") - 
+         pl.element().struct.field("event_timestamp").first()).dt.total_seconds() <= seconds
+    ).list.sum().alias(f"actions_{name}")
+    momentum_expressions.append(expr)
 
-# 4. Compare Success vs. Non-Success Behavior
-comparison = df_stats.group_by("is_success").agg([
-    pl.col("n_actions").median().alias("median_actions"),
-    pl.col("n_actions").mean().alias("avg_actions"),
-    pl.col("duration_days").median().alias("median_days"),
-    pl.col("duration_days").mean().alias("avg_days")
-]).sort("is_success")
+df_momentum = df_stats.with_columns(momentum_expressions)
 
-print("\n--- Success vs. Non-Success Comparison ---")
-print(comparison)
+# 2. Reshape for Visualization
+# We want to see the average actions per window split by success
+vis_data = df_momentum.select([
+    "is_success", 
+    *[f"actions_{name}" for name in windows.keys()]
+]).group_by("is_success").mean().to_pandas()
 
-# 5. What are the most common actions for SUCCESSFUL users only?
-print("\nTop actions for Successful Users...")
-event_defs = pl.read_csv("/Users/derek/UCLA_stats/statM148proj/Event Definitions.csv")
+# 3. Plotting
+vis_data_melted = vis_data.melt(id_vars="is_success", var_name="window", value_name="avg_actions")
 
-top_success_actions = (
-    df_stats.filter(pl.col("is_success"))
-    .select(pl.col("journey").list.explode())
-    .unnest("journey")
-    .group_by("ed_id")
-    .len()
-    .join(event_defs, left_on="ed_id", right_on="event_definition_id")
-    .sort("len", descending=True)
-    .head(10)
-
-    
-)
-
-print(top_success_actions.select(["event_name", "len", "stage"]))
-
-
-# Extract the timestamp of the very first event and calculate actions within 24h
-df_momentum = df_stats.with_columns(
-    pl.col("journey").list.eval(
-        (pl.element().struct.field("event_timestamp") - pl.element().struct.field("event_timestamp").first()).dt.total_seconds() < 86400
-    ).list.sum().alias("actions_first_24h")
-)
-
-momentum_comparison = df_momentum.group_by("is_success").agg(
-    pl.col("actions_first_24h").mean().alias("avg_early_momentum")
-)
-print(momentum_comparison)
+plt.figure(figsize=(10, 6))
+sns.barplot(data=vis_data_melted, x="window", y="avg_actions", hue="is_success")
+plt.title("Action Momentum: Success vs. Non-Success")
+plt.ylabel("Average Number of Actions")
+plt.xlabel("Time Since First Event")
+plt.show()

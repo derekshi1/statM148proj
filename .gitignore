@@ -7,3 +7,5 @@ truncated_data_codex.parquet
 test.csv
 testing_new_data.parquet
 testing_truncated_data_codex.parquet
+/data
+/__pycache__
