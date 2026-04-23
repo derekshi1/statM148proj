@@ -29,3 +29,25 @@ logistic regression CP plot vs random forest CP plot
 specifically a slide on why it is important, why do we care? 
 why do we can about interrpreting black box machine learning models? 
 
+## Ice Plots and PDP Plots
+- Individual conditional expectation (ICE) plots
+    - displays how the prediction of every instance, or observation, changes when a particular feature changes.
+    - This is like a CP plot, but for every instance.
+- Partial Independece Plot (PDP) plot
+    - averages the model prediction of an ice plot. summarizes overal effect of predictor
+    - PDP may evaluate unrealistic feature combinations when predictions are correlated
+- PDP and ICE are only reliable around the local neighborhood fof the true observations
+
+## Shapley Values
+- Method for faily distributing total gains or cost among a group of players who have collaborated
+- Machine learning for feature importance
+- Game Theory Example:
+    - how do we split gold fairly amongst three players
+    - A: average marginal contribution for a particular player
+    - Shapley Value: Add the marginal gain for a particular player across number of appearances. Then divide by the number of appearances
+- Results: useless features has a 0 value
+    - if explanatory variables are equal, they have the same shapley value
+- Visualization: Beeswarm plot shows magnitude AND prediction
+    - Probably better to start with a normal feature importance plot then create a separate scatter plot for the top important features to see the direction
+- Pros: solid theoretical game theory, accounts for all possible subset
+- Con: Computational cost-2^p. Approximation can be done monte carlo
