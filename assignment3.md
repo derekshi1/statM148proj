@@ -21,6 +21,33 @@ Then we apply the Random Truncation, to simulate the random ability to be caught
 Finally, we add the momentum feature which is encoded across 1d, 3d, and 5days. This showed some sort of signal between success and non successful users in EDA, so we hope it is a high impact feature. 
 
 # Task 3
+First we fit a model with all features included before determining which are of great or little importance to predictions. We are using an XGBoost Model due to the size of the dataset, the presence of numeric and categorical features, as well as sparse features that contain many zeros (such as those that track whether or not a particular event occurs in a particular journey).
+
+XGBoost has lots of possible hyperparameters that control the model's behaviour. The values are selected based on what we know about the data. The model is fitted to the training data with the testing data as a benchmark. We then predict the probability of success for the testing data and compare it to the true outcomes. In this case, any probability above 0.9 is labelled as a successful journey, and below 0.9 is unsuccessful.
+
+This model predicted the correct outcome 85% of the time, so we investigate the individual features to improve this score. The initial feature importance plot (feature_importance.png) is difficult to read as there are 119 features present in this model. To remove unnessecary noise we remove any features with less than 0.005 importance.
+
+This plot (most_important_features.png) is much clearer and shows us that last_stage_Downpayment is by far the most important feature in this model, followed by last_stage_First Purchase, and count_ed_29. The majority of the other features counting if and how often a particular feature appeared are ranked ery low, so it is interesting that evend 29 is so important. This code corresponds to account activation.  
+
+We can also calculate the contribution of each feature using their Shapley values, which can be seen in this plot. (shapley_values.png)
+
+Interestingly, the 2 most important features from the importane plot are not even in the top 9 using this metric. The most important features are days_since_last_event, and observed_duration_days, which indicates that the timing and length of the journeys is more important than the other features and that we should focus on those in future models.
+
+We can drop features with a low value, less than 0.01, and refit the model to see if there is an improvement.
+
+This leads to a much simpler value that increases the accuracy ever so slightly. Notably, this model predicts the outcomes of the open journeys more accurately than any other model we have run, including the model predicting all unsuccesful journeys.
+
+Some summary statistics were calculated for this model:
+1. ROC AUC: 0.5
+2. Log Loss: 8.43
+3. Average Precision Score: 0.23
+4. Confusion Matrix
+    True Negatives: 70393
+    False Positives: 0
+    False Negatives: 21495
+    True Positives: 2
+
+
 
 
 # Task 4
