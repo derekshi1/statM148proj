@@ -4,8 +4,7 @@
 
 # Task 1 
 # Task 2 - 
-Got a new accuracy of 
-# Task 3 - Caoimhe
+Got a new accuracy of 0.04685 by using an ensemble model with XGBoost, Logistic Regression, LSTM, and a Neural Network.  The Neural Network and the XGBoost probabilities had a correlation of about 99%, so we can continue to explore other model architectures like transformers, CNN, and GRU.# Task 3 - Caoimhe
 
 # Task 4 - Derek
 
