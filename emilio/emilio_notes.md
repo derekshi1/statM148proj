@@ -51,3 +51,9 @@ why do we can about interrpreting black box machine learning models?
     - Probably better to start with a normal feature importance plot then create a separate scatter plot for the top important features to see the direction
 - Pros: solid theoretical game theory, accounts for all possible subset
 - Con: Computational cost-2^p. Approximation can be done monte carlo
+
+
+## Time Series - Arima
+- standard linear regression assumes that residuals are iid but in time series the current time stesps are corr to previous time steps 
+- good for one or two step forcasting in the future
+- lose interrpretability 
