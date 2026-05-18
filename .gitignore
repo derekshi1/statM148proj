@@ -12,3 +12,7 @@ emilio/kaggle_submission.csv
 test_labeled_flattened.parquet
 kaggle_submission.csv
 emilio/transformers/sin_transformer.csv
+dat_train2.csv
+open_journeys2_flattened_all0.csv
+emilio/open_journeys2.csv
+test_labeled_flattened2.parquet
