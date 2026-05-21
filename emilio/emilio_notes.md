@@ -56,4 +56,33 @@ why do we can about interrpreting black box machine learning models?
 ## Time Series - Arima
 - standard linear regression assumes that residuals are iid but in time series the current time stesps are corr to previous time steps 
 - good for one or two step forcasting in the future
-- lose interrpretability 
+- lose interrpretability
+- ARIMA on weekly and 
+- model uses three components: autoregressive moving average (takes previous terms to create moving average),
+                               integrated (stabilaize linear trends using differences between points),
+                               seasonality (compare timepoints between significant gaps)
+- Theory: auto- remove time dependencies , integrat
+- uncertainty with SARIMA- lack of data points makes seasonality implementation impossible
+
+
+## Causal Inference
+- definition: estimating what would happen under different outcomes
+- want to look at how promotion created effects outcome.
+    - right now 
+- statisical inference: measuring associations, relationships, estimating parameters
+- Directed Acyclic Graph: DAG: 
+
+## Overview of Various Neural Networks
+- Full Transformer Encoder Block:
+    - RNN -> LSTM -> Transformer
+    - Attention is All You Need (2017)
+        - popularized attention mechanism 
+        - In RNN we put in feature engineered data, 
+        - In Transformers we put in Raw data
+            - Q: what am i looking for
+            - K : What do i offer
+            - V: what do i contain
+        - Positional Encoding: self-attention is permutaiton-invariant - whuffle the inputs and outputs accordingly. so the model has no idea what comes first
+    - Bidirectional Encoder Represetnation (BERT)
+        - transformer encoder applied to a specific input format with a specific pre-training procedure 
+        - 
