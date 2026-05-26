@@ -1,0 +1,7 @@
+{
+  "tier1_threshold": 0.4,
+  "tier2_threshold": 0.6,
+  "tier3_threshold": 0.75,
+  "logloss": 0.017037659741075302,
+  "auc": 0.9993294947368421
+}

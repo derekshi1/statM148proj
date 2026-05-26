@@ -1,0 +1,18 @@
+{
+  "seed": 42,
+  "data_path": "/Users/derek/UCLA_stats/statM148proj/data/tpp_processed_data.npz",
+  "train_rows": 350000,
+  "val_rows": 238261,
+  "train_sample_size": 350000,
+  "raw_success_rate": 0.19793996214866638,
+  "target_train_success_rate": 0.05,
+  "actual_train_success_rate": 0.05000000074505806,
+  "num_events": 30,
+  "static_dim": 38,
+  "hidden_dim": 128,
+  "num_layers": 2,
+  "nhead": 8,
+  "epochs": 5,
+  "arch": "transformer",
+  "static_features_fit_on_train_only": true
+}
